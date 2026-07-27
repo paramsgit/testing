@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { motion } from 'motion/react'
+import { motion } from "motion/react";
 import {
   Footprints,
   Car,
@@ -9,11 +9,12 @@ import {
   Bike,
   Check,
   type LucideIcon,
-} from 'lucide-react'
-import { AnimatedCard } from '@/components/ui/animated-card'
-import { TRANSPORT_OPTIONS } from '@/lib/date-options'
-import { staggerContainer, popItem } from '@/animations/variants'
-import { cn } from '@/lib/utils'
+  Truck,
+} from "lucide-react";
+import { AnimatedCard } from "@/components/ui/animated-card";
+import { TRANSPORT_OPTIONS } from "@/lib/date-options";
+import { staggerContainer, popItem } from "@/animations/variants";
+import { cn } from "@/lib/utils";
 
 const ICONS: Record<string, LucideIcon> = {
   walk: Footprints,
@@ -21,11 +22,12 @@ const ICONS: Record<string, LucideIcon> = {
   cab: CarTaxiFront,
   metro: TrainFront,
   bike: Bike,
-}
+  auto: Truck,
+};
 
 interface TransportSelectorProps {
-  value: string[]
-  onToggle: (id: string) => void
+  value: string[];
+  onToggle: (id: string) => void;
 }
 
 export function TransportSelector({ value, onToggle }: TransportSelectorProps) {
@@ -37,8 +39,8 @@ export function TransportSelector({ value, onToggle }: TransportSelectorProps) {
       className="mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 md:grid-cols-3"
     >
       {TRANSPORT_OPTIONS.map((opt) => {
-        const selected = value.includes(opt.id)
-        const Icon = ICONS[opt.icon]
+        const selected = value.includes(opt.id);
+        const Icon = ICONS[opt.icon];
         return (
           <motion.div key={opt.id} variants={popItem}>
             <AnimatedCard
@@ -48,9 +50,9 @@ export function TransportSelector({ value, onToggle }: TransportSelectorProps) {
               aria-checked={selected}
               tabIndex={0}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  onToggle(opt.id)
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onToggle(opt.id);
                 }
               }}
               className="relative flex h-full flex-col items-center gap-3 py-6"
@@ -68,26 +70,26 @@ export function TransportSelector({ value, onToggle }: TransportSelectorProps) {
                 animate={selected ? { y: [0, -6, 0] } : {}}
                 transition={{ duration: 0.5 }}
                 className={cn(
-                  'flex size-14 items-center justify-center rounded-full transition-colors',
+                  "flex size-14 items-center justify-center rounded-full transition-colors",
                   selected
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-accent text-primary',
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-accent text-primary",
                 )}
               >
                 <Icon className="size-7" />
               </motion.span>
               <span
                 className={cn(
-                  'text-center font-heading text-sm font-semibold',
-                  selected ? 'text-primary' : 'text-foreground',
+                  "text-center font-heading text-sm font-semibold",
+                  selected ? "text-primary" : "text-foreground",
                 )}
               >
                 {opt.label}
               </span>
             </AnimatedCard>
           </motion.div>
-        )
+        );
       })}
     </motion.div>
-  )
+  );
 }
